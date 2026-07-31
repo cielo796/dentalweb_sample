@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  en: string;
+  lead?: string;
+}
+
+const { title, en, lead } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-50">
+  <div class="dot-pattern absolute inset-0 opacity-60" aria-hidden="true"></div>
+  <div class="wrap relative py-14 lg:py-20">
+    <nav aria-label="パンくず" class="text-xs text-ink-500">
+      <a href="/" class="no-underline hover:text-brand-600">ホーム</a>
+      <span class="mx-2" aria-hidden="true">/</span>
+      <span class="text-ink-700">{title}</span>
+    </nav>
+
+    <p class="heading-en mt-5">{en}</p>
+    <h1 class="heading-jp text-ink-900">{title}</h1>
+    {lead && <p class="mt-5 max-w-2xl text-sm leading-relaxed text-ink-700 lg:text-base">{lead}</p>}
+  </div>
+</section>

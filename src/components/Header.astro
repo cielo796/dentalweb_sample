@@ -1,0 +1,106 @@
+---
+import { clinic, nav } from '../data/clinic';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="sticky top-0 z-40 border-b border-brand-100 bg-white/95 backdrop-blur">
+  <div class="wrap flex h-16 items-center justify-between gap-4 lg:h-20">
+    <a href="/" class="flex items-center gap-3 no-underline">
+      <span
+        class="grid h-10 w-10 place-items-center rounded-full bg-brand-600 text-lg font-bold text-white lg:h-11 lg:w-11"
+        aria-hidden="true">歯</span
+      >
+      <span class="leading-tight">
+        <span class="block text-base font-bold text-ink-900 lg:text-lg">{clinic.name}</span>
+        <span class="block text-[0.625rem] tracking-[0.18em] text-brand-500">{clinic.nameEn}</span>
+      </span>
+    </a>
+
+    <nav class="hidden lg:block" aria-label="メインメニュー">
+      <ul class="flex items-center gap-7">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class:list={[
+                  'text-sm font-bold no-underline transition-colors',
+                  isActive(item.href)
+                    ? 'text-brand-600'
+                    : 'text-ink-700 hover:text-brand-600',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="hidden items-center gap-4 lg:flex">
+      <div class="text-right leading-tight">
+        <a
+          href={clinic.telHref}
+          class="block text-xl font-bold text-brand-700 no-underline tabular-nums"
+          >{clinic.tel}</a
+        >
+        <span class="block text-[0.6875rem] text-ink-500">{clinic.hours.time}／木・日・祝 休診</span>
+      </div>
+      <a href="/contact/" class="btn btn-accent px-6 py-3 text-sm">ご予約・お問い合わせ</a>
+    </div>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="grid h-11 w-11 place-items-center rounded-lg border border-brand-200 text-brand-700 lg:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span class="sr-only">メニューを開く</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-brand-100 bg-white lg:hidden">
+    <nav class="wrap py-4" aria-label="モバイルメニュー">
+      <ul class="divide-y divide-brand-50">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block py-3 text-sm font-bold text-ink-700 no-underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-4 grid gap-3">
+        <a href={clinic.telHref} class="btn btn-primary w-full text-base"
+          >電話する {clinic.tel}</a
+        >
+        <a href="/contact/" class="btn btn-outline w-full text-sm">ご予約・お問い合わせ</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu?.classList.toggle('hidden', open);
+  });
+</script>

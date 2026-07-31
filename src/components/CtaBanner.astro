@@ -1,0 +1,28 @@
+---
+import { clinic } from '../data/clinic';
+---
+
+<section class="wrap">
+  <div class="relative overflow-hidden rounded-3xl bg-brand-600 px-6 py-12 text-center text-white lg:px-16 lg:py-16">
+    <div class="dot-pattern absolute inset-0 opacity-10" aria-hidden="true"></div>
+    <div class="relative">
+      <p class="heading-en text-brand-100">Contact</p>
+      <h2 class="heading-jp">まずはお気軽にご相談ください</h2>
+      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-brand-50">
+        ご予約・ご相談はお電話が確実です。急な痛みなど当日のご連絡も、可能な限り対応いたします。
+      </p>
+
+      <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href={clinic.telHref} class="btn bg-white text-brand-700 text-lg">
+          <span aria-hidden="true">☎</span>
+          <span class="tabular-nums">{clinic.tel}</span>
+        </a>
+        <a href="/contact/" class="btn btn-accent">お問い合わせフォーム</a>
+      </div>
+
+      <p class="mt-5 text-xs text-brand-100">
+        受付時間 {clinic.hours.time}／{clinic.hours.closedText}
+      </p>
+    </div>
+  </div>
+</section>

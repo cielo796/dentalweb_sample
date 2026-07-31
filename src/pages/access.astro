@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import HoursTable from '../components/HoursTable.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { clinic } from '../data/clinic';
+---
+
+<BaseLayout
+  title="アクセス"
+  description="飯田歯科医院へのアクセス。茨城県取手市白山4丁目1-1、JR取手駅西口より徒歩8分。国道294号沿いに無料駐車場4台完備。"
+>
+  <PageHero
+    en="Access"
+    title="アクセス"
+    lead="JR常磐線「取手駅」西口より徒歩8分。お車の方は国道294号沿いの無料駐車場をご利用ください。"
+  />
+
+  <section class="wrap py-16 lg:py-24">
+    <div class="overflow-hidden rounded-3xl border border-brand-100">
+      <iframe
+        src={clinic.mapEmbedUrl}
+        title={`${clinic.name}の地図`}
+        width="100%"
+        height="420"
+        style="border:0"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <p class="mt-4 text-center">
+      <a href={clinic.mapLinkUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline text-sm">
+        Googleマップで開く
+      </a>
+    </p>
+
+    <div class="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="heading-en">Address</p>
+        <h2 class="heading-jp text-ink-900">所在地・連絡先</h2>
+
+        <dl class="mt-8 divide-y divide-brand-100 border-t border-brand-100 text-sm">
+          <div class="grid gap-1 py-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+            <dt class="text-xs font-bold text-brand-600 sm:text-sm">住所</dt>
+            <dd class="text-ink-700">〒{clinic.postalCode}<br />{clinic.address}</dd>
+          </div>
+          <div class="grid gap-1 py-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+            <dt class="text-xs font-bold text-brand-600 sm:text-sm">電話番号</dt>
+            <dd>
+              <a href={clinic.telHref} class="text-xl font-bold text-brand-700 no-underline tabular-nums">
+                {clinic.tel}
+              </a>
+            </dd>
+          </div>
+          <div class="grid gap-1 py-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+            <dt class="text-xs font-bold text-brand-600 sm:text-sm">駐車場</dt>
+            <dd class="text-ink-700">{clinic.parking.detail}</dd>
+          </div>
+        </dl>
+
+        <div class="mt-8">
+          <HoursTable />
+        </div>
+      </div>
+
+      <div>
+        <p class="heading-en">Route</p>
+        <h2 class="heading-jp text-ink-900">交通のご案内</h2>
+
+        <ul class="mt-8 grid gap-4">
+          {
+            clinic.access.map((a) => (
+              <li class="flex items-start gap-4 rounded-2xl bg-brand-50 p-5">
+                <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-base" aria-hidden="true">
+                  🚉
+                </span>
+                <span>
+                  <span class="block text-sm font-bold text-ink-900">{a.label}</span>
+                  <span class="block text-sm text-ink-700">{a.detail}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-8 rounded-2xl border-2 border-dashed border-brand-200 p-6">
+          <p class="text-sm font-bold text-brand-700">
+            お車でお越しの方<span class="sample-badge ml-2">SAMPLE</span>
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-700">
+            国道294号を取手駅方面へ。○○交差点を△△方面へ進み、□□の先が当院です。
+            駐車場は医院前の国道294号沿いに4台分ございます。
+          </p>
+          <p class="mt-3 text-xs text-ink-500">※ 目印となる建物名などを追記してください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

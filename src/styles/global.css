@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------
+   デザイントークン（Tailwind v4 @theme）
+   --------------------------------------------------------- */
+@theme {
+  --color-brand-50: #f0f9f8;
+  --color-brand-100: #d9f0ee;
+  --color-brand-200: #b3e0dc;
+  --color-brand-300: #82c9c4;
+  --color-brand-400: #4faaa5;
+  --color-brand-500: #2f8e8a;
+  --color-brand-600: #23726f;
+  --color-brand-700: #1d5b59;
+  --color-brand-800: #194948;
+  --color-brand-900: #163d3c;
+
+  --color-accent-400: #f2b872;
+  --color-accent-500: #e79f4a;
+  --color-accent-600: #cf8531;
+
+  --color-ink-500: #64748b;
+  --color-ink-700: #334155;
+  --color-ink-900: #1b2733;
+
+  --font-sans:
+    'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo,
+    system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+}
+
+/* ---------------------------------------------------------
+   ベース
+   --------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background-color: #fff;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   共通パーツ（プレーンCSS）
+   --------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--color-brand-600);
+  color: #fff;
+  box-shadow: 0 10px 20px -10px rgba(35, 114, 111, 0.8);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-brand-700);
+}
+
+.btn-accent {
+  background-color: var(--color-accent-500);
+  color: #fff;
+  box-shadow: 0 10px 20px -10px rgba(207, 133, 49, 0.8);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-600);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-brand-600);
+  color: var(--color-brand-700);
+  background-color: #fff;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-brand-50);
+}
+
+/* 見出し */
+.heading-en {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  font-weight: 700;
+  color: var(--color-brand-500);
+  text-transform: uppercase;
+}
+
+.heading-jp {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
+/* 装飾パターン */
+.dot-pattern {
+  background-image: radial-gradient(var(--color-brand-200) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+/* リッチテキスト */
+.prose-jp p + p {
+  margin-top: 1rem;
+}
+
+/* SAMPLE表示バッジ */
+.sample-badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+  background-color: #fde68a;
+  color: #78350f;
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}

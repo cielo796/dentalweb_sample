@@ -1,0 +1,14 @@
+---
+interface Props {
+  en: string;
+  title: string;
+  align?: 'left' | 'center';
+}
+
+const { en, title, align = 'left' } = Astro.props;
+---
+
+<div class={align === 'center' ? 'text-center' : ''}>
+  <p class="heading-en">{en}</p>
+  <h2 class="heading-jp text-ink-900">{title}</h2>
+</div>

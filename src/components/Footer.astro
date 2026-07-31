@@ -1,0 +1,64 @@
+---
+import { clinic, nav } from '../data/clinic';
+import HoursTable from './HoursTable.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 bg-brand-800 text-brand-50">
+  <div class="wrap grid gap-12 py-14 lg:grid-cols-[1.1fr_1fr_1fr] lg:py-16">
+    <div>
+      <p class="text-xl font-bold text-white">{clinic.name}</p>
+      <p class="mt-1 text-[0.6875rem] tracking-[0.2em] text-brand-300">{clinic.nameEn}</p>
+
+      <address class="mt-5 not-italic text-sm leading-relaxed text-brand-100">
+        〒{clinic.postalCode}<br />
+        {clinic.address}
+      </address>
+
+      <p class="mt-4">
+        <a
+          href={clinic.telHref}
+          class="text-2xl font-bold text-white no-underline tabular-nums"
+          >{clinic.tel}</a
+        >
+      </p>
+      <p class="mt-1 text-xs text-brand-200">
+        {clinic.parking.summary}／{clinic.access[0].label}{clinic.access[0].detail}
+      </p>
+    </div>
+
+    <div>
+      <p class="text-sm font-bold text-white">診療時間</p>
+      <div class="mt-4">
+        <HoursTable tone="dark" />
+      </div>
+    </div>
+
+    <div>
+      <p class="text-sm font-bold text-white">サイトマップ</p>
+      <ul class="mt-4 grid gap-2.5 text-sm">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-brand-100 no-underline hover:text-white">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/privacy/" class="text-brand-100 no-underline hover:text-white">
+            プライバシーポリシー
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-brand-700">
+    <div class="wrap py-5 text-center text-xs text-brand-200">
+      &copy; {year} {clinic.name}. All rights reserved.
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { clinic } from '../data/clinic';
+
+const flow = [
+  { step: '01', title: 'ご予約', body: 'お電話でご希望の日時をお知らせください。' },
+  { step: '02', title: '受付・問診', body: '保険証をご提示のうえ、問診票にご記入いただきます。' },
+  { step: '03', title: '検査・診断', body: 'お口の中を確認し、必要に応じてレントゲンを撮影します。' },
+  { step: '04', title: 'ご説明', body: '現在の状態と治療の進め方をご説明します。' },
+  { step: '05', title: '治療', body: 'ご納得いただいたうえで治療を開始します。' },
+  { step: '06', title: 'メンテナンス', body: '治療後は定期的なチェックとクリーニングをご案内します。' },
+];
+---
+
+<BaseLayout
+  title="診療案内"
+  description="飯田歯科医院の診療内容。むし歯治療、歯のクリーニング・歯周病、小児歯科、入れ歯、予防歯科まで、保険診療を基本に対応しています。"
+>
+  <PageHero
+    en="Treatment"
+    title="診療案内"
+    lead="保険治療を基本に、むし歯治療から入れ歯まで幅広く対応しています。気になる症状があれば、まずはご相談ください。"
+  />
+
+  <section class="wrap py-16 lg:py-24">
+    <div class="grid gap-14">
+      {
+        clinic.treatments.map((t, i) => (
+          <article id={t.slug} class="scroll-mt-24 grid gap-6 border-b border-brand-100 pb-14 last:border-0 lg:grid-cols-[auto_1fr] lg:gap-12">
+            <p class="text-5xl font-bold text-brand-100 tabular-nums lg:text-6xl">
+              {String(i + 1).padStart(2, '0')}
+            </p>
+
+            <div>
+              <h2 class="text-xl font-bold text-brand-700 lg:text-2xl">{t.title}</h2>
+              <p class="mt-2 text-sm font-bold text-ink-700">{t.summary}</p>
+              <p class="mt-4 text-sm leading-relaxed text-ink-700">{t.body}</p>
+
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {t.points.map((p) => (
+                  <li class="rounded-full bg-brand-50 px-4 py-1.5 text-xs font-bold text-brand-700">
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-brand-50/60 py-16 lg:py-24">
+    <div class="wrap">
+      <p class="heading-en text-center">Flow</p>
+      <h2 class="heading-jp text-center text-ink-900">初診の流れ</h2>
+
+      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          flow.map((f) => (
+            <li class="rounded-2xl bg-white p-7 shadow-sm">
+              <p class="text-xs font-bold tracking-[0.2em] text-brand-400">STEP {f.step}</p>
+              <h3 class="mt-2 text-base font-bold text-ink-900">{f.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-700">{f.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap py-16 lg:py-24">
+    <div class="rounded-3xl border-2 border-brand-100 p-8 lg:p-12">
+      <h2 class="text-lg font-bold text-brand-700">自由診療について</h2>
+      <p class="mt-3 text-sm leading-relaxed text-ink-700">
+        当院では自由診療（自費治療）の導入はしておりません。保険診療の範囲で、患者さまにとって最善と考えられる方法をご提案します。
+        治療内容や費用については、事前に必ずご説明いたします。
+      </p>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

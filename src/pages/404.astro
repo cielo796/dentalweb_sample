@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { clinic } from '../data/clinic';
+---
+
+<BaseLayout title="ページが見つかりません">
+  <section class="wrap grid place-items-center py-24 text-center lg:py-32">
+    <p class="text-6xl font-bold text-brand-100">404</p>
+    <h1 class="heading-jp mt-4 text-ink-900">ページが見つかりませんでした</h1>
+    <p class="mt-4 max-w-md text-sm leading-relaxed text-ink-700">
+      お探しのページは移動または削除された可能性があります。
+      お急ぎの場合はお電話にてお問い合わせください。
+    </p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+      <a href="/" class="btn btn-primary">ホームへ戻る</a>
+      <a href={clinic.telHref} class="btn btn-outline tabular-nums">{clinic.tel}</a>
+    </div>
+  </section>
+</BaseLayout>

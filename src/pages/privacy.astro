@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { clinic } from '../data/clinic';
+
+const sections = [
+  {
+    title: '1. 個人情報の取得について',
+    body: '当院は、診療およびお問い合わせへの対応に必要な範囲で、適法かつ公正な手段により個人情報を取得します。',
+  },
+  {
+    title: '2. 利用目的',
+    body: '取得した個人情報は、診療・調剤・検査等の医療サービスの提供、ご予約やお問い合わせへの対応、各種法令に基づく事務手続きの目的で利用します。',
+  },
+  {
+    title: '3. 第三者提供',
+    body: '法令に基づく場合、および人の生命・身体・財産の保護のために必要な場合を除き、ご本人の同意なく個人情報を第三者へ提供することはありません。',
+  },
+  {
+    title: '4. 安全管理措置',
+    body: '個人情報の漏えい、滅失またはき損の防止その他の安全管理のため、必要かつ適切な措置を講じます。',
+  },
+  {
+    title: '5. 開示・訂正・利用停止',
+    body: 'ご本人からの開示・訂正・利用停止のお申し出については、法令に従い適切に対応いたします。',
+  },
+  {
+    title: '6. お問い合わせ窓口',
+    body: `本ポリシーに関するお問い合わせは、${clinic.name}（TEL: ${clinic.tel}）までご連絡ください。`,
+  },
+];
+---
+
+<BaseLayout title="プライバシーポリシー" description="飯田歯科医院の個人情報保護方針です。">
+  <PageHero en="Privacy Policy" title="プライバシーポリシー" />
+
+  <section class="wrap max-w-3xl py-16 lg:py-24">
+    <div class="rounded-2xl border-2 border-dashed border-accent-400 bg-white p-5">
+      <p class="text-sm font-bold text-accent-600">
+        以下は雛形です<span class="sample-badge ml-2">SAMPLE</span>
+      </p>
+      <p class="mt-2 text-xs leading-relaxed text-ink-700">
+        公開前に、医院の実際の運用に合わせて内容をご確認・修正してください。
+      </p>
+    </div>
+
+    <p class="mt-10 text-sm leading-relaxed text-ink-700">
+      {clinic.name}（以下「当院」）は、患者さまの個人情報の保護を重要な責務と考え、
+      個人情報の保護に関する法律その他の関係法令を遵守し、以下の方針に基づき個人情報を取り扱います。
+    </p>
+
+    <div class="mt-10 grid gap-8">
+      {
+        sections.map((s) => (
+          <section>
+            <h2 class="text-base font-bold text-brand-700">{s.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700">{s.body}</p>
+          </section>
+        ))
+      }
+    </div>
+
+    <p class="mt-12 text-xs text-ink-500">制定日：＿＿年＿＿月＿＿日（SAMPLE）</p>
+  </section>
+</BaseLayout>
